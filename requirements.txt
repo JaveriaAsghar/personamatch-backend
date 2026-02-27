@@ -1,0 +1,10 @@
+flask
+numpy
+tensorflow
+opencv-python-headless
+mediapipe
+librosa
+moviepy
+torch
+whisper
+sentence-transformers
