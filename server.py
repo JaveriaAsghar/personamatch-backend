@@ -3,6 +3,7 @@
 import os
 import base64
 from flask import Flask, request, jsonify
+from model_inference import predict_personality 
 
 TEMP_DIR = "temp_recordings"
 os.makedirs(TEMP_DIR, exist_ok=True)
@@ -18,8 +19,6 @@ def home():
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
-
-    from model_inference import predict_personality  # move import here
 
     data = request.get_json()
     if not data:
