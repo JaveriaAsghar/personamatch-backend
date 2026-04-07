@@ -12,11 +12,17 @@ from feature_extraction import (
 MODEL_PATH = "fyp_model.keras"
 TRAITS = ["openness", "conscientiousness", "extraversion", "agreeableness", "neuroticism"]
 
-model = load_model(MODEL_PATH)
+model = None
+
+def load_my_model():
+    global model
+    if model is None:
+        from tensorflow.keras.models import load_model
+        model = load_model(MODEL_PATH)
 
 
 def predict_personality(video_paths):
-    audio_feats, visual_feats, text_feats = [], [], []
+    load_my_model()  # load only when needed
 
     for path in video_paths:
         audio_feats.append(extract_audio_features(path))
