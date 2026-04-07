@@ -1,7 +1,7 @@
+print("Starting server...")
 import os
 import base64
 from flask import Flask, request, jsonify
-from model_inference import predict_personality
 
 TEMP_DIR = "temp_recordings"
 os.makedirs(TEMP_DIR, exist_ok=True)
@@ -19,6 +19,7 @@ def home():
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
+    from model_inference import predict_personality
 
     data = request.get_json()
     if not data:
@@ -70,5 +71,6 @@ def analyze():
 
 
 if __name__ == "__main__":
+    print("Running Flask app...")
     port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port, debug=False)
+    app.run(host="0.0.0.0", port=port)
